@@ -1,32 +1,105 @@
 # What is umm?
 
-* **umm** は、Unity のアセットを管理するための仕組みです。
-  * **U**nity **M**odule **M**anager の略称です。
-* 大小様々なアセットのまとまりをモジュールと呼び、それらの依存関係を [Node.js](https://nodejs.org/) のパッケージ管理ツールである [npm](https://docs.npmjs.com/) を用いて管理します。
+**umm** is an abbreviation **U**nity **M**odule **M**anager, a management system for assets of Unity.
 
-# How to use?
+We call various assets aggregation as `modules`, and manage thier dependencies using [yarn](https://yarnpkg.com/) which is an upward compatible tool of [npm](https://docs.npmjs.com/) which is a package management system in [Node.js](https://nodejs.org/).
 
-## モジュールを利用する
+## How to use?
 
-1. [Node.js](https://nodejs.org/) をインストールします。
-  * 具体的なバージョンの制限はありませんが、 GitHub からのパッケージインストールが可能なバージョンを採択しましょう。
-1. モジュールを適用したい Unity プロジェクトのルートディレクトリで `npm install` コマンドを実行します。
-  * 利用したいパッケージの配信先に応じて `npm install github:umm-projects/hoge_fuga` などと指定します。
-  * [npm が対応している配信先](https://docs.npmjs.com/files/package.json#dependencies)であれば、場所の制限はありません。
-1. 自動的にプロジェクトの `Assets/Modules/` 以下にモジュールが配信されます。
+### To construct environment to use `umm`
 
-## モジュールを作成する
+Will explain the environment construction method to use umm.
 
-1. [Template](https://github.com/umm-projects/_template_module/archive/v1.0.0.tar.gz) をダウンロード、展開します。
-1. `package.json` の必要箇所を書き換えます。
-  * `__XXX__` となっている箇所すべてを書き換えます。
-1. 通常の Unity プロジェクトとして Unity Editor で開き、モジュールを作成します。
-  * このとき、既存の umm モジュールを利用してモジュールを開発することも可能です。
-1. GitHub などのリポジトリに push します。
-  * 公開不可能なコードや有償のアセットを含む場合は private リポジトリに push しましょう。
-  * 希望があれば [umm-projects](https://github.com/umm-projects) のコントリビュータとして参加し、 umm-projects Organization のモジュールとして公開することも可能です。
-  * 配信先として `npm publish` コマンドを用いて npmjs.org に配信することも可能ですが、配信物が Node.js のコードではないため推奨されません。
+1. Install [Node.js](https://nodejs.org/).
+    * It is a good idea to install the latest version.
+1. Install [yarn](https://yarnpkg.com/).
 
-## サブプロジェクトを作成する
+### To retrieve modules
 
-* To be written...
+Will explain how to retrieve some modules in a Unity project already module managed by `umm`.
+
+1. Run `yarn install` command in the root directory of the Unity project for which you want to retrieve the modules.
+1. Modules are deploying under the `Assets/Modules/` of the Unity project automatically.
+
+### To add modules
+
+Will exprain how to add a module into a Unity project.
+
+1. Run `yarn install` command in the root directory of the Unity project for which you want to add the module.
+1. Module is deploying under the `Assets/Modules/` of the Unity project, also create of update the files which named `package.json` and `yarn.lock`. 
+    * I strongly recommend to version control each manifest files which manage information of modules.
+
+#### Name of modules
+
+Module name specification method differs according to module publication destination.
+
+##### Specify the npm registry such as npmjs.org
+
+```shell
+yarn add @$SCOPE/$MODULE
+```
+
+##### Specify the git repository such as GitHub
+
+```shell
+yarn add github:$ORGANIZATION/$REPOSITORY
+```
+
+##### Specify the tar ball URL directly
+
+```shell
+yarn add $TAR_BALL_URL
+```
+
+##### Specify the path to some local storage
+
+```shell
+yarn add file:$PATH_TO_MODULE
+```
+
+#### Versioning
+
+Specify the version to be installed according to [SemVer](https://semver.org)'s rules
+
+Please check [the document of npm](https://docs.npmjs.com/files/package.json#dependencies) to specify the range of versions.
+
+You can specify a range of versions for a git repository like GitHub if you use yarn.
+
+```shell
+yarn add "umm/cafu_core#^1.0.0"
+                        ^^^^^^
+```
+
+### To create modules
+
+#### Prepare modules
+
+1. Executing the following command creates a template for the module.
+    * Thanks @mattak !!
+
+```shell
+bash <(curl -L https://gist.githubusercontent.com/mattak/f95a8f4c8750ee61aea79ec09d87f659/raw/e2313c98c9420ecb340b763a90de09e23f8b5602/umm-create.sh)
+```
+
+2. You can develop the module like normally Unity project.
+    * Of cource, you can use other umm modules.
+2. Publish the module into some repository like GitHub.
+    * But, you must deploy into private repository if your module includes paid assets or private codes.
+    * You can contribute as contributer of umm if you want, so you can publish module in [umm organizations](https://github.com/umm).
+    * I don't recommend to publish to npmjs.org with use `npm publish` command, because assets is not codes of Node.js.
+
+#### Distribution destination of modules
+
+The module can publishes into any [destination which supported by npm](https://docs.npmjs.com/files/package.json#dependencies), such as [GitHub](https://github.com/), [BitBucket](https://bitbucket.com) and local storage.
+
+#### Versioning of modules
+
+Versioning according to [SemVer](https://semver.org)'s rules.
+
+If you publish a module to GitHub, you can think of it as a module version by setting the tag of SemVer notation as `git tag`.
+
+By using the `npm version` command, you can changes version of `package.json` and run `git tag` command at the same time.
+
+## Links
+
+[README.md (Japanese)](README.ja.md)
