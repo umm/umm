@@ -99,3 +99,7 @@ Versioning according to [SemVer](https://semver.org)'s rules.
 If you publish a module to GitHub, you can think of it as a module version by setting the tag of SemVer notation as `git tag`.
 
 By using the `npm version` command, you can changes version of `package.json` and run `git tag` command at the same time.
+
+## Links
+
+[README.md (Japanese)](README.ja.md)

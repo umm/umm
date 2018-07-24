@@ -101,3 +101,7 @@ bash <(curl -L https://gist.githubusercontent.com/mattak/f95a8f4c8750ee61aea79ec
 モジュールを GitHub に公開する場合は、`git tag` として SemVer 記法のタグを設定することで、モジュールのバージョンと見なすことができます。
 
 `npm version` コマンドを用いることで、 `package.json` のバージョン更新と `git tag` を同時に実行できます。
+
+## Links
+
+[README.md (English)](README.md)
