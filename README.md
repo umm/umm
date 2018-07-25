@@ -72,6 +72,48 @@ yarn add "umm/cafu_core#^1.0.0"
 
 ### To create modules
 
+#### Create `.umm-config.json`
+
+To create umm modules needs configuration file names `.umm-config.json`.
+
+Replace placeholders in template when initialize module accoring to this file.
+
+Write the configuration like below and put to your home directory.
+
+```json
+{
+  "scopes": {
+    "@monry": {
+      "repository": {
+        "type": "<REPOSITORY_TYPE>",
+        "host": "<REPOSITORY_HOST>",
+        "group": "<REPOSITORY_GROUP>",
+        "user": "<REPOSITORY_USER>"
+      },
+      "author": {
+        "name": "<AUTHOR_NAME>",
+        "email": "<AUTHOR_EMAIL>",
+        "url": "<AUTHOR_HOMEPAGE>"
+      },
+      "license": "<DEFAULT_LICENSE>"
+    }
+  }
+}
+```
+
+Means of parameters are defined below table.
+
+| Parameter | Example | Description |
+| --- | --- | --- |
+| REPOSITORY_TYPE | `git` | Specify type of repository. Currently supported only `git` 😓 |
+| REPOSITORY_HOST | `github.com` | Specify hostname of repository. |
+| REPOSITORY_GROUP | `monry` | Specify name of user or organization of repository. |
+| REPOSITORY_USER | `git` | Specify ssh username of repository. |
+| AUTHOR_NAME | `monry` | Specify name of author. |
+| AUTHOR_EMAIL | `monry@example.com` | Specify email of author. |
+| AUTHOR_HOMEPAGE | `https://github.com/monry` | Specify homepage of author. |
+| DEFAULT_LICENSE | `MIT` | Specify default license. |
+
 #### Prepare modules
 
 1. Executing the following command creates a template for the module.

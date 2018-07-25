@@ -72,6 +72,48 @@ yarn add "umm/cafu_core#^1.0.0"
 
 ### モジュールを作成する
 
+#### `.umm-config.json` を作成する
+
+umm モジュールを作成する際には `.umm-config.json` というファイルが必要になります。
+
+このファイルの内容に従って、モジュール初期化時にテンプレート内のプレースホルダを置換します。
+
+以下のような設定ファイルを、ユーザのホームディレクトリ直下に配置してください。
+
+```json
+{
+  "scopes": {
+    "@monry": {
+      "repository": {
+        "type": "<REPOSITORY_TYPE>",
+        "host": "<REPOSITORY_HOST>",
+        "group": "<REPOSITORY_GROUP>",
+        "user": "<REPOSITORY_USER>"
+      },
+      "author": {
+        "name": "<AUTHOR_NAME>",
+        "email": "<AUTHOR_EMAIL>",
+        "url": "<AUTHOR_HOMEPAGE>"
+      },
+      "license": "<DEFAULT_LICENSE>"
+    }
+  }
+}
+```
+
+パラメータの意味はそれぞれ以下の表のように定義しています。
+
+| パラメータ | 例 | 説明 |
+| --- | --- | --- |
+| REPOSITORY_TYPE | `git` | リポジトリの種別 / 今の所 `git` のみをサポートしています 😓 |
+| REPOSITORY_HOST | `github.com` | リポジトリのホスト名 |
+| REPOSITORY_GROUP | `monry` | リポジトリのユーザ名か Organization 名 |
+| REPOSITORY_USER | `git` | リポジトリの ssh ユーザ名 |
+| AUTHOR_NAME | `monry` | 作者の名前 |
+| AUTHOR_EMAIL | `monry@example.com` | 作者のメールアドレス |
+| AUTHOR_HOMEPAGE | `https://github.com/monry` | 作者のホームページ |
+| DEFAULT_LICENSE | `MIT` | デフォルトのライセンス |
+
 #### テンプレートを展開する
 
 1. 以下のコマンドを実行すると、モジュールの雛形が作成されます。
