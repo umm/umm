@@ -120,7 +120,7 @@ Means of parameters are defined below table.
     * Thanks @mattak !!
 
 ```shell
-bash <(curl -L https://gist.githubusercontent.com/mattak/f95a8f4c8750ee61aea79ec09d87f659/raw/e2313c98c9420ecb340b763a90de09e23f8b5602/umm-create.sh)
+bash <(curl -L https://gist.githubusercontent.com/mattak/f95a8f4c8750ee61aea79ec09d87f659/raw/cb49f66f5a7747fa700b2e8fb57f386969e64b49/umm-create.sh)
 ```
 
 2. You can develop the module like normally Unity project.
